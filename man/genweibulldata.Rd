@@ -4,8 +4,7 @@
 \alias{genweibulldata}
 \title{Generating function for Weibull Data.}
 \usage{
-genweibulldata(sample_size, scale1, hazard_ratio, common_shape,
-  censor_value)
+genweibulldata(sample_size, scale1, hazard_ratio, common_shape, censor_value)
 }
 \arguments{
 \item{sample_size}{Number of subjects per arm.}

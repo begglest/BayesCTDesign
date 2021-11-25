@@ -13,5 +13,6 @@ BayesCTDesign v0.6.1 (Release date: 2021-11-15)
 Changes:
 
 * For piecewise exponential model (pwe), changed the code to call eha::pchreg() instead of eha::phreg() as instructed by the eha package.
+* Removed the deprecated functions print_table() and plot_table().
 
 

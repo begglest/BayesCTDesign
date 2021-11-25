@@ -89,7 +89,7 @@ weibull_test <- historic_sim(trial_reps = 500, outcome_type = "weibull",
 #were experimental over control hazard ratio among randomized subjects is 0.6.
 #The resulting table is a table of power with different sample sizes represented
 #in the rows, and different a0 values represented in the columns.
-test_table0_6 <- print(bayes_ctd_array=weibull_test, measure="power",
+test_table0_6 <- print(x=weibull_test, measure="power",
                        tab_type="WX|YZ", effect_val=0.6,
                        rand_control_diff_val=1.0)
 print(test_table0_6)
@@ -99,7 +99,7 @@ print(test_table0_6)
 #exist between historical and randomized controls.
 #The resulting table is a table of power with different sample sizes represented
 #in the rows, and different a0 values represented in the columns.
-test_table0_7 <- print(bayes_ctd_array=weibull_test, measure="power",
+test_table0_7 <- print(x=weibull_test, measure="power",
                        tab_type="WX|YZ", effect_val=0.7,
                        rand_control_diff_val=1.0)
 print(test_table0_7)
@@ -110,7 +110,7 @@ print(test_table0_7)
 #exist between historical and randomized controls.
 #The resulting table is a table of power with different sample sizes represented
 #in the rows, and different a0 values represented in the columns.
-test_table1_0 <- print(bayes_ctd_array=weibull_test, measure="power",
+test_table1_0 <- print(x=weibull_test, measure="power",
                        tab_type="WX|YZ", effect_val=1.0,
                        rand_control_diff_val=1.0)
 print(test_table1_0)
@@ -120,7 +120,7 @@ print(test_table1_0)
 #between historical and randomized controls is represented by a hazard ratio
 #of 1.2.  The resulting table is a table of power with different sample sizes 
 #represented in the rows, and different a0 values represented in the columns.
-test_table0_7_1_2 <- print(bayes_ctd_array=weibull_test, measure="power",
+test_table0_7_1_2 <- print(x=weibull_test, measure="power",
                            tab_type="WX|YZ", effect_val=0.7,
                            rand_control_diff_val=1.2)
 print(test_table0_7_1_2)
@@ -130,7 +130,7 @@ print(test_table0_7_1_2)
 #between historical and randomized controls is represented by a hazard ratio
 #of 0.8.  The resulting table is a table of power with different sample sizes 
 #represented in the rows, and different a0 values represented in the columns.
-test_table0_7_0_8 <- print(bayes_ctd_array=weibull_test, measure="power",
+test_table0_7_0_8 <- print(x=weibull_test, measure="power",
                            tab_type="WX|YZ", effect_val=0.7,
                            rand_control_diff_val=0.8)
 print(test_table0_7_0_8)
@@ -140,14 +140,14 @@ print(test_table0_7_0_8)
 #from historical controls are included in trial, and effect is set to 0.7.  The 
 #resulting table is a table of power with different historical/randomized control 
 #differences in the rows, and different a0 values represented in the columns.
-test_table150_0_7 <- print_table(bayes_ctd_array=weibull_test, measure="power",
+test_table150_0_7 <- print(x=weibull_test, measure="power",
                           tab_type="ZX|WY", subj_per_arm_val=150,
                           effect_val=0.7)
 print(test_table150_0_7)
 
 #For the seventh table, look at the power by control difference by a0 table again, 
 #but this time set subj_per_arm_val equal to 175.
-test_table175_0_7 <- print_table(bayes_ctd_array=weibull_test, measure="power",
+test_table175_0_7 <- print(x=weibull_test, measure="power",
                           tab_type="ZX|WY", subj_per_arm_val=175,
                           effect_val=0.7)
 print(test_table175_0_7)
@@ -155,7 +155,7 @@ print(test_table175_0_7)
 #Finally, for the eighth table, look at the power by control difference by a0 
 #table again, but this time set subj_per_arm_val equal to 175 and the 
 #effect value to 1.0.
-test_table175_1_0 <- print_table(bayes_ctd_array=weibull_test, measure="power",
+test_table175_1_0 <- print(x=weibull_test, measure="power",
                           tab_type="ZX|WY", subj_per_arm_val=175,
                           effect_val=1.0)
 print(test_table175_1_0)
@@ -179,7 +179,7 @@ In addition to tabulating the results as we have done, we can also plot a slice 
 
 ```{r example2}
 #Create a plot of the power simulation results.
-plot(bayes_ctd_array=weibull_test, measure="power", tab_type="WX|YZ",
+plot(x=weibull_test, measure="power", tab_type="WX|YZ",
      smooth=FALSE, plot_out=TRUE, effect_val=0.7,
      rand_control_diff_val=1.2)
 ```
@@ -207,7 +207,7 @@ pwe_test <- simple_sim(trial_reps = 500, outcome_type = "pwe",
                         censor_value = 3, alpha = 0.05, get_var = TRUE,
                         get_bias = TRUE, get_mse = TRUE, seedval=123)
 
-test_table <- print(bayes_ctd_array=pwe_test, measure="power")
+test_table <- print(x=pwe_test, measure="power")
 print(test_table)
 ```
 

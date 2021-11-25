@@ -135,173 +135,6 @@ global_error_checks_simple <- function(outcome_type, subj_per_arm, get_var, get_
 
 }
 
-#' Checks \code{print_table()} Function Call for Errors.
-#'
-#' \code{print_table_error_checks()} function used only internally by
-#' \code{print_table()} function to check for proper input.  Not to be called
-#' directly by user.
-#'
-#' @param bayes_ctd_robj See help page for \code{print_table()}.
-#' @param measure, See help page for \code{print_table()}.
-#' @param tab_type, See help page for \code{print_table()}.
-#' @param subj_per_arm_val See help page for \code{print_table()}.
-#' @param a0_val See help page for \code{print_table()}.
-#' @param effect_val See help page for \code{print_table()}.
-#' @param rand_control_diff_val See help page for \code{print_table()}.
-#'
-#' @return \code{print_table_error_checks()} returns messages when
-#' \code{print_table} function inputs are incorrectly specified.  Not to be called
-#' directly by user.
-#'
-#' @examples
-#' #None.
-#' @keywords internal
-#' @noRd
-print_table_error_checks <- function(bayes_ctd_robj, measure, tab_type, subj_per_arm_val, a0_val, effect_val, rand_control_diff_val) {
-
-    if (!(tolower(measure) %in% c("power", "est", "var", "bias", "mse"))) {
-        stop("print_table() requires measure to be equal to power, est, var, bias, mse")
-    }
-
-    if ((tolower(measure) == "var") & is.null(bayes_ctd_robj$data$var)){
-        stop("Table of variance cannot be printed or plotted, because variance estimates were not requested in the trial simulation.")
-    }
-    if ((tolower(measure) == "bias") & is.null(bayes_ctd_robj$data$bias)){
-        stop("Table of bias cannot be printed or plotted, because bias estimates were not requested in the trial simulation.")
-    }
-    if ((tolower(measure) == "mse") & is.null(bayes_ctd_robj$data$mse)){
-       stop("Table of mse cannot be printed or plotted, because mse estimates were not requested in the trial simulation.")
-    }
-
-
-    if (!(toupper(tab_type) %in% c("WX|YZ", "WY|XZ", "WZ|XY", "XY|WZ", "XZ|WY", "YZ|WX", "ZX|WY", "XW|YZ", "YW|XZ", "YX|WZ", "ZW|XY", "ZX|WY", "ZY|WX"))) {
-        stop("print_table() requires tab_type to be equal to WX|YZ, WY|XZ, WZ|XY, XY|WZ, XZ|WY, YZ|WX, ZX|WY, XW|YZ, YW|XZ, YX|WZ, ZW|XY, ZX|WY, or ZY|WX")
-    }
-
-    if (toupper(tab_type) == "WX|YZ") {
-        if (is.null(effect_val) | is.null(rand_control_diff_val)) {
-            stop("print_table() requires effect_val and rand_control_diff_val to be non-missing and equal to a value used in your simulation.")
-        }
-    }
-    if (toupper(tab_type) == "WY|XZ") {
-        if (is.null(a0_val) | is.null(rand_control_diff_val)) {
-            stop("print_table() requires a0_val and rand_control_diff_val to be non-missing and equal to a value used in your simulation.")
-        }
-    }
-    if (toupper(tab_type) == "WZ|XY") {
-        if (is.null(a0_val) | is.null(effect_val)) {
-            stop("print_table() requires a0_val and effect_val to be non-missing and equal to a value used in your simulation.")
-        }
-    }
-    if (toupper(tab_type) == "XY|WZ") {
-        if (is.null(subj_per_arm_val) | is.null(rand_control_diff_val)) {
-            stop("print_table() requires subj_per_arm_val and rand_control_diff_val to be non-missing and equal to a value used in your simulation.")
-        }
-    }
-    if (toupper(tab_type) == "XZ|WY") {
-        if (is.null(subj_per_arm_val) | is.null(effect_val)) {
-            stop("print_table() requires subj_per_arm_val and effect_val to be non-missing and equal to a value used in your simulation.")
-        }
-    }
-    if (toupper(tab_type) == "YZ|WX") {
-        if (is.null(subj_per_arm_val) | is.null(a0_val)) {
-            stop("print_table() requires subj_per_arm_val and a0_val to be non-missing and equal to a value used in your simulation.")
-        }
-    }
-    if (toupper(tab_type) == "ZX|WY") {
-        if (is.null(subj_per_arm_val) | is.null(effect_val)) {
-            stop("print_table() requires subj_per_arm_val and effect_val to be non-missing and equal to a value used in your simulation.")
-        }
-    }
-    if (toupper(tab_type) == "XW|YZ") {
-      if (is.null(effect_val) | is.null(rand_control_diff_val)) {
-        stop("print_table() requires effect_val and rand_control_diff_val to be non-missing and equal to a value used in your simulation.")
-      }
-    }
-    if (toupper(tab_type) == "YW|XZ") {
-      if (is.null(a0_val) | is.null(rand_control_diff_val)) {
-        stop("print_table() requires a0_val and rand_control_diff_val to be non-missing and equal to a value used in your simulation.")
-      }
-    }
-    if (toupper(tab_type) == "YX|WZ") {
-      if (is.null(subj_per_arm_val) | is.null(rand_control_diff_val)) {
-        stop("print_table() requires subj_per_arm_val and rand_control_diff_val to be non-missing and equal to a value used in your simulation.")
-      }
-    }
-    if (toupper(tab_type) == "ZW|XY") {
-      if (is.null(a0_val) | is.null(effect_val)) {
-        stop("print_table() requires a0_val and effect_val to be non-missing and equal to a value used in your simulation.")
-      }
-    }
-    if (toupper(tab_type) == "ZX|WY") {
-      if (is.null(subj_per_arm_val) | is.null(effect_val)) {
-        stop("print_table() requires subj_per_arm_val and effect_val to be non-missing and equal to a value used in your simulation.")
-      }
-    }
-    if (toupper(tab_type) == "ZY|WX") {
-      if (is.null(subj_per_arm_val) | is.null(a0_val)) {
-        stop("print_table() requires subj_per_arm_val and a0_val to be non-missing and equal to a value used in your simulation.")
-      }
-    }
-
-    subj_per_arm_vec <- bayes_ctd_robj$subj_per_arm
-    a0_val_vec <- bayes_ctd_robj$a0_vals
-    effect_val_vec <- bayes_ctd_robj$effect_vals
-    rand_control_diff_vec <- bayes_ctd_robj$rand_control_diff
-
-    if (!is.null(subj_per_arm_val)) {
-        if (is.na(match(subj_per_arm_val, subj_per_arm_vec))) {
-            text_val <- "print_table() requires subj_per_arm_val to be equal to one of the following values: "
-            for (i in 1:length(subj_per_arm_vec)) {
-                text_val <- paste(text_val, subj_per_arm_vec[i], sep = "")
-                if (i != length(subj_per_arm_vec)) {
-                  text_val <- paste(text_val, ", ", sep = "")
-                }
-            }
-            stop(text_val)
-        }
-    }
-
-    if (!is.null(a0_val)) {
-        if (is.na(match(a0_val, a0_val_vec))) {
-            text_val <- "print_table() requires a0_val to be equal to one of the following values: "
-            for (i in 1:length(a0_val_vec)) {
-                text_val <- paste(text_val, a0_val_vec[i], sep = "")
-                if (i != length(a0_val_vec)) {
-                  text_val <- paste(text_val, ", ", sep = "")
-                }
-            }
-            stop(text_val)
-        }
-    }
-
-    if (!is.null(effect_val)) {
-        if (is.na(match(effect_val, effect_val_vec))) {
-            text_val <- "print_table() requires effect_val to be equal to one of the following values: "
-            for (i in 1:length(effect_val_vec)) {
-                text_val <- paste(text_val, effect_val_vec[i], sep = "")
-                if (i != length(effect_val_vec)) {
-                  text_val <- paste(text_val, ", ", sep = "")
-                }
-            }
-            stop(text_val)
-        }
-    }
-
-    if (!is.null(rand_control_diff_val)) {
-        if (is.na(match(rand_control_diff_val, rand_control_diff_vec))) {
-            text_val <- "print_table() requires rand_control_diff_val to be equal to one of the following values: "
-            for (i in 1:length(rand_control_diff_vec)) {
-                text_val <- paste(text_val, rand_control_diff_vec[i], sep = "")
-                if (i != length(rand_control_diff_vec)) {
-                  text_val <- paste(text_val, ", ", sep = "")
-                }
-            }
-            stop(text_val)
-        }
-    }
-
-}
 
 
 #' Checks \code{print.bayes_ctd_array()} Function Call for Errors.
@@ -310,13 +143,13 @@ print_table_error_checks <- function(bayes_ctd_robj, measure, tab_type, subj_per
 #' \code{print.bayes_ctd_array()} function to check for proper input.  Not to be called
 #' directly by user.
 #'
-#' @param bayes_ctd_robj See help page for \code{print_table()}.
-#' @param measure, See help page for \code{print_table()}.
-#' @param tab_type, See help page for \code{print_table()}.
-#' @param subj_per_arm_val See help page for \code{print_table()}.
-#' @param a0_val See help page for \code{print_table()}.
-#' @param effect_val See help page for \code{print_table()}.
-#' @param rand_control_diff_val See help page for \code{print_table()}.
+#' @param bayes_ctd_robj See help page for \code{print()}.
+#' @param measure, See help page for \code{print()}.
+#' @param tab_type, See help page for \code{print()}.
+#' @param subj_per_arm_val See help page for \code{print()}.
+#' @param a0_val See help page for \code{print()}.
+#' @param effect_val See help page for \code{print()}.
+#' @param rand_control_diff_val See help page for \code{print()}.
 #'
 #' @return \code{print_error_checks()} returns messages when
 #' \code{printbayes_ctd_array()} function inputs are incorrectly specified.  Not to be called
@@ -474,186 +307,6 @@ print_error_checks <- function(bayes_ctd_robj, measure, tab_type, subj_per_arm_v
 
 
 
-#' Checks \code{plot_table()} Function Call for Errors.
-#'
-#' \code{plot_table_error_checks()} function used only internally by
-#' \code{plot_table()} function to check for proper input.  Not to be called
-#' directly by user.
-#'
-#' @param bayes_ctd_robj See help page for \code{plot_table()}.
-#' @param measure See help page for \code{plot_table()}.
-#' @param tab_type See help page for \code{plot_table()}.
-#' @param subj_per_arm_val See help page for \code{plot_table()}.
-#' @param a0_val See help page for \code{print_table()}.
-#' @param effect_val See help page for \code{plot_table()}.
-#' @param rand_control_diff_val See help page for \code{plot_table()}.
-#' @param smooth See help page for \code{plot_table()}.
-#' @param plot_out See help page for \code{plot_table()}.
-#' @param span See help page for \code{plot_table()}.
-#'
-#' @return \code{plot_table_error_checks()} returns messages when
-#' \code{plot_table()} function inputs are incorrectly specified.  Not to be called
-#' directly by user.
-#'
-#' @examples
-#' #None
-#' @keywords internal
-#' @noRd
-plot_table_error_checks <- function(bayes_ctd_robj, measure, tab_type, smooth, plot_out, subj_per_arm_val, a0_val, effect_val,
-    rand_control_diff_val, span) {
-
-    if (!(tolower(measure) %in% c("power", "est", "var", "bias", "mse"))) {
-        stop("plot_table() requires measure to be equal to power, est, var, bias, mse")
-    }
-
-    if (!(toupper(tab_type) %in% c("WX|YZ", "WY|XZ", "WZ|XY", "XY|WZ", "XZ|WY", "YZ|WX", "ZX|WY", "XW|YZ", "YW|XZ", "YX|WZ", "ZW|XY", "ZX|WY", "ZY|WX"))) {
-      stop("plot_table() requires tab_type to be equal to WX|YZ, WY|XZ, WZ|XY, XY|WZ, XZ|WY, YZ|WX, ZX|WY, XW|YZ, YW|XZ, YX|WZ, ZW|XY, ZX|WY, or ZY|WX")
-    }
-
-    if (toupper(tab_type) == "WX|YZ") {
-        if (is.null(effect_val) | is.null(rand_control_diff_val)) {
-            stop("plot_table() requires effect_val and rand_control_diff_val to be non-missing and equal to a value used in your simulation.")
-        }
-    }
-    if (toupper(tab_type) == "WY|XZ") {
-        if (is.null(a0_val) | is.null(rand_control_diff_val)) {
-            stop("plot_table() requires a0_val and rand_control_diff_val to be non-missing and equal to a value used in your simulation.")
-        }
-    }
-    if (toupper(tab_type) == "WZ|XY") {
-        if (is.null(a0_val) | is.null(effect_val)) {
-            stop("plot_table() requires a0_val and effect_val to be non-missing and equal to a value used in your simulation.")
-        }
-    }
-    if (toupper(tab_type) == "XY|WZ") {
-        if (is.null(subj_per_arm_val) | is.null(rand_control_diff_val)) {
-            stop("plot_table() requires subj_per_arm_val and rand_control_diff_val to be non-missing and equal to a value used in your simulation.")
-        }
-    }
-    if (toupper(tab_type) == "XZ|WY") {
-        if (is.null(subj_per_arm_val) | is.null(effect_val)) {
-            stop("plot_table() requires subj_per_arm_val and effect_val to be non-missing and equal to a value used in your simulation.")
-        }
-    }
-    if (toupper(tab_type) == "YZ|WX") {
-        if (is.null(subj_per_arm_val) | is.null(a0_val)) {
-            stop("plot_table() requires subj_per_arm_val and a0_val to be non-missing and equal to a value used in your simulation.")
-        }
-    }
-    if (toupper(tab_type) == "ZX|WY") {
-      if (is.null(subj_per_arm_val) | is.null(effect_val)) {
-           stop("plot_table() requires subj_per_arm_val and effect_val to be non-missing and equal to a value used in your simulation.")
-        }
-    }
-    if (toupper(tab_type) == "XW|YZ") {
-      if (is.null(effect_val) | is.null(rand_control_diff_val)) {
-        stop("plot_table() requires effect_val and rand_control_diff_val to be non-missing and equal to a value used in your simulation.")
-      }
-    }
-    if (toupper(tab_type) == "YW|XZ") {
-      if (is.null(a0_val) | is.null(rand_control_diff_val)) {
-        stop("plot_table() requires a0_val and rand_control_diff_val to be non-missing and equal to a value used in your simulation.")
-      }
-    }
-    if (toupper(tab_type) == "YX|WZ") {
-      if (is.null(subj_per_arm_val) | is.null(rand_control_diff_val)) {
-        stop("plot_table() requires subj_per_arm_val and rand_control_diff_val to be non-missing and equal to a value used in your simulation.")
-      }
-    }
-    if (toupper(tab_type) == "ZW|XY") {
-      if (is.null(a0_val) | is.null(effect_val)) {
-        stop("plot_table() requires a0_val and effect_val to be non-missing and equal to a value used in your simulation.")
-      }
-    }
-    if (toupper(tab_type) == "ZX|WY") {
-      if (is.null(subj_per_arm_val) | is.null(effect_val)) {
-        stop("plot_table() requires subj_per_arm_val and effect_val to be non-missing and equal to a value used in your simulation.")
-      }
-    }
-    if (toupper(tab_type) == "ZY|WX") {
-      if (is.null(subj_per_arm_val) | is.null(a0_val)) {
-        stop("plot_table() requires subj_per_arm_val and a0_val to be non-missing and equal to a value used in your simulation.")
-      }
-    }
-
-    # Need to check that smooth is TRUE/FALSE
-    if (smooth != TRUE & smooth != FALSE) {
-        stop("plot_table() requires smooth to be either TRUE or FALSE")
-    }
-
-    # Need to check that plot_out is TRUE/FALSE
-    if (plot_out != TRUE & plot_out != FALSE) {
-        stop("plot_table() requires plot_out to be either TRUE or FALSE")
-    }
-
-    # Need to make sure span elements are all positive numbers.
-    for (sp in span) {
-        if (!is.numeric(sp))
-            stop("plot_table() requires span to be numeric.")
-        if (sp <= 0)
-            stop("plot_table() requires span to be positive")
-    }
-
-    subj_per_arm_vec <- bayes_ctd_robj$subj_per_arm
-    a0_val_vec <- bayes_ctd_robj$a0_vals
-    effect_val_vec <- bayes_ctd_robj$effect_vals
-    rand_control_diff_vec <- bayes_ctd_robj$rand_control_diff
-
-    if (!is.null(subj_per_arm_val)) {
-        if (is.na(match(subj_per_arm_val, subj_per_arm_vec))) {
-            text_val <- "plot_table() requires subj_per_arm_val to be equal to one of the following values: "
-            for (i in 1:length(subj_per_arm_vec)) {
-                text_val <- paste(text_val, subj_per_arm_vec[i], sep = "")
-                if (i != length(subj_per_arm_vec)) {
-                  text_val <- paste(text_val, ", ", sep = "")
-                }
-            }
-            stop(text_val)
-        }
-    }
-
-    if (!is.null(a0_val)) {
-        if (is.na(match(a0_val, a0_val_vec))) {
-            text_val <- "plot_table() requires a0_val to be equal to one of the following values: "
-            for (i in 1:length(a0_val_vec)) {
-                text_val <- paste(text_val, a0_val_vec[i], sep = "")
-                if (i != length(a0_val_vec)) {
-                  text_val <- paste(text_val, ", ", sep = "")
-                }
-            }
-            stop(text_val)
-        }
-    }
-
-    if (!is.null(effect_val)) {
-        if (is.na(match(effect_val, effect_val_vec))) {
-            text_val <- "plot_table() requires effect_val to be equal to one of the following values: "
-            for (i in 1:length(effect_val_vec)) {
-                text_val <- paste(text_val, effect_val_vec[i], sep = "")
-                if (i != length(effect_val_vec)) {
-                  text_val <- paste(text_val, ", ", sep = "")
-                }
-            }
-            stop(text_val)
-        }
-    }
-
-    if (!is.null(rand_control_diff_val)) {
-        if (is.na(match(rand_control_diff_val, rand_control_diff_vec))) {
-            text_val <- "plot_table() requires rand_control_diff_val to be equal to one of the following values: "
-            for (i in 1:length(rand_control_diff_vec)) {
-                text_val <- paste(text_val, rand_control_diff_vec[i], sep = "")
-                if (i != length(rand_control_diff_vec)) {
-                  text_val <- paste(text_val, ", ", sep = "")
-                }
-            }
-            stop(text_val)
-        }
-    }
-}
-
-
-
 
 #' Checks \code{plot.bayes_ctd_array()} Function Call for Errors.
 #'
@@ -661,16 +314,16 @@ plot_table_error_checks <- function(bayes_ctd_robj, measure, tab_type, smooth, p
 #' \code{plot.bayes_ctd_array()} function to check for proper input.  Not to be called
 #' directly by user.
 #'
-#' @param bayes_ctd_robj See help page for \code{plot_table()}.
-#' @param measure See help page for \code{plot_table()}.
-#' @param tab_type See help page for \code{plot_table()}.
-#' @param subj_per_arm_val See help page for \code{plot_table()}.
-#' @param a0_val See help page for \code{print_table()}.
-#' @param effect_val See help page for \code{plot_table()}.
-#' @param rand_control_diff_val See help page for \code{plot_table()}.
-#' @param smooth See help page for \code{plot_table()}.
-#' @param plot_out See help page for \code{plot_table()}.
-#' @param span See help page for \code{plot_table()}.
+#' @param bayes_ctd_robj See help page for \code{plot()}.
+#' @param measure See help page for \code{plot()}.
+#' @param tab_type See help page for \code{plot()}.
+#' @param subj_per_arm_val See help page for \code{plot()}.
+#' @param a0_val See help page for \code{print()}.
+#' @param effect_val See help page for \code{plot()}.
+#' @param rand_control_diff_val See help page for \code{plot()}.
+#' @param smooth See help page for \code{plot()}.
+#' @param plot_out See help page for \code{plot()}.
+#' @param span See help page for \code{plot()}.
 #'
 #' @return \code{plot_error_checks()} returns messages when
 #' \code{plot.bayes_ctd_array()} function inputs are incorrectly specified.  Not to be called

@@ -20,4 +20,4 @@ Imports: eha (>= 2.9.0),
     survival (>= 2.41-3),
     reshape2 (>= 1.4.3),
 	stats (>= 3.5.0)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.2

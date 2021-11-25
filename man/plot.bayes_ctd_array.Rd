@@ -4,11 +4,23 @@
 \alias{plot.bayes_ctd_array}
 \title{Plot Data from Two Arm Bayesian Clinical Trial Simulation.}
 \usage{
-\method{plot}{bayes_ctd_array}(x = NULL, measure = "power",
-  tab_type = "WX|YZ", smooth = FALSE, plot_out = TRUE,
-  subj_per_arm_val = NULL, a0_val = NULL, effect_val = NULL,
-  rand_control_diff_val = NULL, span = 0.75, degree = 2,
-  family = "gaussian", title = NULL, ylim = NULL, ...)
+\method{plot}{bayes_ctd_array}(
+  x = NULL,
+  measure = "power",
+  tab_type = "WX|YZ",
+  smooth = FALSE,
+  plot_out = TRUE,
+  subj_per_arm_val = NULL,
+  a0_val = NULL,
+  effect_val = NULL,
+  rand_control_diff_val = NULL,
+  span = 0.75,
+  degree = 2,
+  family = "gaussian",
+  title = NULL,
+  ylim = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{Name of object of class \code{bayes_ctd_array} containing

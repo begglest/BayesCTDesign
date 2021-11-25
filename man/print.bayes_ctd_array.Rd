@@ -4,10 +4,17 @@
 \alias{print.bayes_ctd_array}
 \title{Print Data from Two Arm Bayesian Clinical Trial Simulation.}
 \usage{
-\method{print}{bayes_ctd_array}(x = NULL, measure = "power",
-  tab_type = "WX|YZ", subj_per_arm_val = NULL, a0_val = NULL,
-  effect_val = NULL, rand_control_diff_val = NULL,
-  print_chg_warn = 1, ...)
+\method{print}{bayes_ctd_array}(
+  x = NULL,
+  measure = "power",
+  tab_type = "WX|YZ",
+  subj_per_arm_val = NULL,
+  a0_val = NULL,
+  effect_val = NULL,
+  rand_control_diff_val = NULL,
+  print_chg_warn = 1,
+  ...
+)
 }
 \arguments{
 \item{x}{Name of object of class \code{bayes_ctd_array} containing

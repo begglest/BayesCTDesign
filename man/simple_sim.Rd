@@ -4,11 +4,21 @@
 \alias{simple_sim}
 \title{Two Arm Bayesian Clinical Trial Simulation without Historical Data}
 \usage{
-simple_sim(trial_reps = 100, outcome_type = "weibull",
-  subj_per_arm = c(50, 100, 150, 200, 250), effect_vals = c(0.6, 1,
-  1.4), control_parms = NULL, time_vec = NULL, censor_value = NULL,
-  alpha = 0.05, get_var = FALSE, get_bias = FALSE, get_mse = FALSE,
-  seedval = NULL, quietly = TRUE)
+simple_sim(
+  trial_reps = 100,
+  outcome_type = "weibull",
+  subj_per_arm = c(50, 100, 150, 200, 250),
+  effect_vals = c(0.6, 1, 1.4),
+  control_parms = NULL,
+  time_vec = NULL,
+  censor_value = NULL,
+  alpha = 0.05,
+  get_var = FALSE,
+  get_bias = FALSE,
+  get_mse = FALSE,
+  seedval = NULL,
+  quietly = TRUE
+)
 }
 \arguments{
 \item{trial_reps}{Number of trials to replicate within each combination of
@@ -77,8 +87,7 @@ a lot of output space.  Default is \code{TRUE}.}
   was used. See Details for a discussion about the contents of
   \code{data}. Results from the simulation contained in the \code{bayes_ctd_array}
   object can be printed or plotted using the \code{print()} and
-  \code{plot()} methods or the older \code{print_table()} and
-  \code{plot_table()} methods. The results can also be accessed using basic list
+  \code{plot()} methods. The results can also be accessed using basic list
   element identification and array slicing. For example, to get the power results
   from a simulation, one could use the code \code{bayes_ctd_array$data$power}, where
   \code{bayes_ctd_array} is replaced with the name of the variable containing the
@@ -121,11 +130,7 @@ on the scale of the values returned in \code{est}.
 
 The object \code{bayes_ctd_array} has two primary methods, \code{print()} and
 \code{plot()}, for printing and plotting slices of the arrays contained in
-\code{bayes_ctd_array$data}.  The object \code{bayes_ctd_array} also has two
-additional methods carried over from the first package release: \code{print_table()},
-which is the same as \code{print()}, and \code{plot_table()}, which is the same as
-\code{print_table()}.  All four methods allow a user to print and plot slices of
-the data arrays contained in \code{bayes_ctd_array$data}.
+\code{bayes_ctd_array$data}.
 
 As dimensions of the four dimensional array increases, the time required to complete
 the simulation will increase; however, it will be faster than a similar simulation
