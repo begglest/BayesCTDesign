@@ -134,6 +134,8 @@
 #'   \code{bayes_ctd_array} is replaced with the name of the variable containing the
 #'   \code{bayes_ctd_array} object.
 #'
+#' @references Eggleston et al. BayesCTDesign: An R Package for Bayesian Trial Design Using Historical Control Data. \emph{Journal of Statistical Software}, November 2021, Volume 100, Issue 21,  <doi:10.18637/jss.v100.i21>.
+#'
 #' @examples
 #' #Generate a sample of historical data for use in example.
 #' set.seed(2250)
@@ -465,6 +467,9 @@ historic_sim <- function(trial_reps = 100, outcome_type = "weibull", subj_per_ar
 #'   \code{bayes_ctd_array} is replaced with the name of the variable containing the
 #'   \code{bayes_ctd_array} object.
 #'
+#' @references Eggleston et al. (2021). BayesCTDesign: An R Package for Bayesian Trial Design Using Historical Control Data. \emph{Journal of Statistical Software}, November 2021, Volume 100, Issue 21,  <doi:10.18637/jss.v100.i21>.
+#'
+#'
 #' @examples
 #' #Run a Weibull simulation, using simple_sim().
 #' #For meaningful results, trial_reps needs to be much larger than 2.
@@ -662,6 +667,8 @@ simple_sim <- function(trial_reps = 100, outcome_type = "weibull", subj_per_arm 
 #' @param ...	further arguments passed to or from other methods.
 #'
 #' @return \code{print()} returns a two dimensional array of simulation results.
+#'
+#' @references Eggleston et al. BayesCTDesign: An R Package for Bayesian Trial Design Using Historical Control Data.  \emph{Journal of Statistical Software}, November 2021, Volume 100, Issue 21,  <doi:10.18637/jss.v100.i21>.
 #'
 #' @examples
 #' #Run a Weibull simulation, using simple_sim().
@@ -1298,6 +1305,8 @@ print.bayes_ctd_array <- function(x = NULL, measure = "power", tab_type = "WX|YZ
 #'   or \code{rand_control_diff_val}, whichever populates the x-axis on the graph to
 #'   contain enough elements to justify the smoothing.  No checking occurs to
 #'   determine if enough elements are present to justify smoothing.
+#'
+#' @references Eggleston et al. (2021). BayesCTDesign: An R Package for Bayesian Trial Design Using Historical Control Data. \emph{Journal of Statistical Software}, November 2021, Volume 100, Issue 21,  <doi:10.18637/jss.v100.i21>.
 #'
 #' @examples
 #' #Run a Weibull simulation, using simple_sim().
