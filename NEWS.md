@@ -7,7 +7,7 @@ Changes:
 * Corrected the calculation of variance.  Except for Gaussian outcomes, variance is currently calculated using delta method and the variance of log effect.  In the previous submission, the reported variance was exactly exp(log effect variance).
 
 
-BayesCTDesign v0.6.1 (Release date: 2021-11-15)
+BayesCTDesign v0.6.1 (Release date: 2021-11-27)
 ==============
 
 Changes:
