@@ -12,7 +12,7 @@ Description: A set of functions to help clinical trial researchers calculate pow
 Depends: R (>= 3.5.0)
 License: GPL-3
 Encoding: UTF-8
-LazyData: true
+LazyData: false
 URL: https://github.com/begglest/BayesCTDesign
 BugReports: https://github.com/begglest/BayesCTDesign/issues
 Imports: eha (>= 2.9.0),
